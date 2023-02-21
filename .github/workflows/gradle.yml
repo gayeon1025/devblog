@@ -53,6 +53,7 @@ jobs:
           username: opc
           source: "devblog-0.0.1-SNAPSHOT.jar"
           target: "/home/opc"
+          key: ${{ secrets.PRIVATE_KEY }}
 #         shell: bash
 #         run: scp ~/devblog/build/libs/devblog-0.0.1-SNAPSHOT.jar opc@144.24.77.45:/home/opc
 
