@@ -8,6 +8,7 @@ import com.cnu.devblog.repository.PostSpecification;
 import com.cnu.devblog.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,8 @@ public class PostController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Post>> getPosts(PageRequest pageRequest,
+    public ResponseEntity<Page<Post>> getPosts(@RequestParam(value = "page", defaultValue = "0") int page,
+                                               @RequestParam(value = "size", defaultValue = "10") int size,
                                                @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
                                                @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
                                                @RequestParam(value = "tag", required = false) Tag tag) {
@@ -60,7 +62,35 @@ public class PostController {
             );
         }
 
-        return ResponseEntity.ok(postService.getPosts(spec, pageRequest.of()));
+        return ResponseEntity.ok(postService.getPosts(spec, new PageRequest(page, size).of()));
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<Post>> getPosts(@RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+                                               @RequestParam(value = "endDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate,
+                                               @RequestParam(value = "tag", required = false) Tag tag) {
+        Specification<Post> spec = (root, query, criteriaBuilder) -> null;
+
+        if (startDate != null) {
+            spec = spec.and(
+                    PostSpecification
+                            .greaterThanOrEqualTo(LocalDateTime.of(startDate, LocalDateTime.MIN.toLocalTime()))
+            );
+        }
+        if (endDate != null) {
+            spec = spec.and(
+                    PostSpecification
+                            .lessThanOrEqualTo(LocalDateTime.of(endDate, LocalDateTime.MAX.toLocalTime()))
+            );
+        }
+        if (tag != null) {
+            spec = spec.and(
+                    PostSpecification
+                            .equalTo(tag)
+            );
+        }
+
+        return ResponseEntity.ok(postService.getPosts(spec, Pageable.unpaged()));
     }
 
     @PutMapping("/{id}")

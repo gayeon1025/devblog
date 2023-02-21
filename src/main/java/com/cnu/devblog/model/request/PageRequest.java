@@ -10,6 +10,11 @@ public class PageRequest {
     private int page;
     private int size;
 
+    public PageRequest(int page, int size) {
+        this.page = page;
+        this.size = size;
+    }
+
     public void setPage(int page) {
         this.page = Math.max(page, 0);
     }

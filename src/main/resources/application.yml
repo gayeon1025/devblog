@@ -1,14 +1,50 @@
+#spring:
+#  datasource: # H2 DB 설정
+##    url: jdbc:mysql://localhost:3306/devblog?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+#    url: jdbc:mysql://144.24.77.45:3306/devblog?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+#    username: devblog
+#    password: 123123
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    properties:
+#      hibernate:
+#        show_sql: true  # sql 쿼리를 보여줍니다.
+#        format_sql: true  # sql query formatting
+#        use_sql_comments: true  # sql 쿼리의 추가정보를 보여줍니다.
+
+#spring:
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+#  datasource:
+#    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;
+#    driver-class-name: org.h2.Driver
+#    username: devblog
+#    password: devblog
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    show-sql: true
+
 spring:
-  datasource: # H2 DB 설정
-#    url: jdbc:mysql://localhost:3306/devblog?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    url: jdbc:mysql://144.24.77.45:3306/devblog?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    username: devblog
-    password: 123123
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    url: jdbc:h2:mem:test # test 부분을 자신이 원하는 것으로 바꾸시면 됩니다.
+    username: kaya # username과 password는 자신의 설정에 맞게
+    password:
+    driver-class-name: org.h2.Driver
+
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: create # 어플리케이션을 시작할 때 데이터베이스를 초기화하고 다시 테이블 생성
     properties:
       hibernate:
-        show_sql: true  # sql 쿼리를 보여줍니다.
-        format_sql: true  # sql query formatting
-        use_sql_comments: true  # sql 쿼리의 추가정보를 보여줍니다.
+        format_sql: true # 실행되는 query를 보여줌
+
+logging.level:
+  org.hibernate.SQL: debug
