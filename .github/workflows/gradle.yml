@@ -45,9 +45,15 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: jar
-      - name: Cmd
-        shell: bash
-        run: ls
+      - name: Send jar to remote server
+        uses: appleboy/scp-action@master
+        with:
+          host: 144.24.77.45
+          username: opc
+          source: "devblog-0.0.1-SNAPSHOT.jar"
+          target: "/home/opc"
+#         shell: bash
+#         run: scp ~/devblog/build/libs/devblog-0.0.1-SNAPSHOT.jar opc@144.24.77.45:/home/opc
 
 #         run: | 
 #           scp ~/devblog/build/libs/devblog-0.0.1-SNAPSHOT.jar opc@144.24.77.45:/home/opc
