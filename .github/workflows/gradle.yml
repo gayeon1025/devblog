@@ -57,6 +57,9 @@ jobs:
 #     needs: send-jar
     runs-on: ubuntu-latest
     steps:
+      - name: temp
+        shell: bash
+        run: ls
       - name: move deploy.sh
         uses: appleboy/scp-action@master
         with:
