@@ -60,13 +60,21 @@ jobs:
       - name: move deploy.sh
         uses: appleboy/scp-action@master
         with:
-          username: opc
           host: 144.24.77.45
-#           host: ${{ secrets.HOST }}
-          key: ${{ secrets.PRIVATE_KEY }}
+          username: opc
           source: "deploy.sh"
           target: "/home/opc"
-          #strip_components: 2
+          key: ${{ secrets.PRIVATE_KEY }}
+#       - name: move deploy.sh
+#         uses: appleboy/scp-action@master
+#         with:
+#           username: opc
+#           host: 144.24.77.45
+# #           host: ${{ secrets.HOST }}
+#           key: ${{ secrets.PRIVATE_KEY }}
+#           source: "deploy.sh"
+#           target: "/home/opc"
+#           #strip_components: 2
       - name: execute script
         uses: appleboy/ssh-action@master
         with:
