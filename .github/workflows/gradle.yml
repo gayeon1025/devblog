@@ -68,7 +68,7 @@ jobs:
           source: "deploy.sh"
           target: "/home/opc"
           key: ${{ secrets.PRIVATE_KEY }}
-      - name: execute script
+      - name: Execute script
         uses: appleboy/ssh-action@master
         with:
           username: opc
@@ -76,6 +76,3 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
           script: cd /home/opc && chmod +x deploy.sh && ./deploy.sh
-      
-    
-    
