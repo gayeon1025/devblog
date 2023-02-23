@@ -63,7 +63,8 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           username: opc
-          host: ${{ secrets.HOST }}
+          host: 144.24.77.45
+#           host: ${{ secrets.HOST }}
           key: ${{ secrets.PRIVATE_KEY }}
           source: "./deploy.sh"
           target: "/home/opc"
