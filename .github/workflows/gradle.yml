@@ -56,6 +56,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
   
   run-app:
+    needs: send-jar
     runs-on: ubuntu-latest
     steps:
       - name: move deploy.sh
