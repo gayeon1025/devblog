@@ -73,4 +73,4 @@ jobs:
           host: 34.22.77.64
           key: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
-          script: cd /home/adulkid && chmod +x deploy.sh && ./deploy.sh
+          script: cd /home/adulkid.kaya && chmod +x deploy.sh && ./deploy.sh
