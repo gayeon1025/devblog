@@ -48,8 +48,8 @@ jobs:
         with:
           host: 144.24.77.45
           username: opc
-          source: "devblog-0.0.1-SNAPSHOT.jar"
-          target: "/home/opc"
+          source: "real_coding_server-0.0.1-SNAPSHOT.jar"
+          target: "/home/adulkid.kaya"
           key: ${{ secrets.PRIVATE_KEY }}
   
   run-app:
@@ -61,16 +61,16 @@ jobs:
       - name: Move deploy.sh
         uses: appleboy/scp-action@master
         with:
-          host: 144.24.77.45
-          username: opc
+          host: 34.22.77.64
+          username: adulkid.kaya
           source: "deploy.sh"
-          target: "/home/opc"
+          target: "/home/adulkid.kaya"
           key: ${{ secrets.PRIVATE_KEY }}
       - name: Execute script
         uses: appleboy/ssh-action@master
         with:
-          username: opc
-          host: 144.24.77.45
+          username: adulkid.kaya
+          host: 34.22.77.64
           key: ${{ secrets.PRIVATE_KEY }}
           script_stop: true
-          script: cd /home/opc && chmod +x deploy.sh && ./deploy.sh
+          script: cd /home/adulkid && chmod +x deploy.sh && ./deploy.sh
